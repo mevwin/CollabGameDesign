@@ -11,17 +11,38 @@
             "id": "e7d050728f7cafc6",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "Classes/Managers/Core Game Managers/Level Manager.md",
-                "mode": "source",
-                "source": false
+                "file": "Structure/File Structure.canvas",
+                "viewState": {
+                  "x": 76.5,
+                  "y": 453.5,
+                  "zoom": -0.5959591708316526
+                }
               },
-              "icon": "lucide-file",
-              "title": "Level Manager"
+              "icon": "lucide-layout-dashboard",
+              "title": "File Structure"
+            }
+          },
+          {
+            "id": "bfcd76cd3fd57a02",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Structure/Code Structure.canvas",
+                "viewState": {
+                  "x": 2032.933989099629,
+                  "y": -1409.8958867058934,
+                  "zoom": -1.1290331600428603
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Code Structure"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -168,44 +189,44 @@
       "bases:Create new base": false
     }
   },
-  "active": "e7d050728f7cafc6",
+  "active": "bfcd76cd3fd57a02",
   "lastOpenFiles": [
-    "Classes/Managers/Interaction and Progression Manager/Puzzle Manager.md",
-    "Classes/Managers/Interaction and Progression Manager/Checkpoint Manager.md",
-    "Classes/Managers/Interaction and Progression Manager/Inventory Manager.md",
-    "Classes/Managers/Core Game Managers/Level Manager.md",
-    "Classes/Managers/Core Game Managers/Game Manager.md",
-    "Classes/Managers/UI Util/Settings Manager.md",
-    "Classes/Managers/UI Util/Save Manager.md",
-    "Classes/Managers/UI Util/UI Manager.md",
-    "Classes/Managers/Input Output/Narration Manager.md",
-    "Classes/Managers/Input Output/Audio Manager.md",
-    "Classes/Managers/Input Output/Input Manager.md",
-    "Classes/Entity List/Player.md",
-    "Classes/Entity List",
-    "Classes/Entity Class.md",
-    "Data/Gameplay/Items.md",
-    "Data/Audio/Sound Clips.md",
+    "Structure/Code Structure.canvas",
+    "Data & Assets/Audio/Music.md",
+    "Data & Assets/Audio/Sound Clips.md",
+    "Structure/File Structure.canvas",
+    "Data & Assets/Player Settings/Save Data.md",
+    "Systems/Utility Systems/Save Load System.md",
+    "Systems/Utility Systems/Settings System.md",
+    "Systems/World and Level/Checkpoint Reset System.md",
+    "Systems/World and Level/Level Transition System.md",
+    "Data & Assets/Entity Prefabs.md",
+    "Systems/Interaction and Puzzle/Puzzle Logic System.md",
+    "Data & Assets/Audio/Narration Line.md",
+    "Classes/Managers/Narration Manager.md",
+    "Systems/World and Level/Level System.md",
+    "Classes/Managers/Level Manager.md",
+    "Classes/Managers/Inventory Manager.md",
+    "Classes/Audio Management/Audio Effect.md",
+    "Classes/Audio Management/Audio Manager.md",
+    "Classes/Entity/Item.md",
+    "Classes/Managers/Game Manager.md",
+    "Systems/Visual Systems/Visual Effect System.md",
+    "Systems/Visual Systems/UI System.md",
+    "Systems/Visual Systems/Narration System.md",
+    "Systems/Visual Systems/Audio Manager.md",
+    "Systems/Utility Systems/Event System.md",
+    "Systems/Interaction and Puzzle/Interaction System.md",
+    "Systems/Interaction and Puzzle/Item System.md",
+    "Classes/Audio Management",
+    "Classes/Entity",
     "Classes/Managers/UI Util",
     "Classes/Managers/Interaction and Progression Manager",
     "Classes/Managers/Input Output",
     "Classes/Managers/Core Game Managers",
     "Classes/Managers",
     "Classes",
-    "Managers/UI Util/UI Manager.md",
-    "Managers/UI Util/Settings Manager.md",
-    "Managers/UI Util/Save Manager.md",
-    "Managers/Interaction and Progression Manager/Puzzle Manager.md",
-    "Managers/Interaction and Progression Manager/Checkpoint Manager.md",
-    "Managers/Interaction and Progression Manager/Inventory Manager.md",
-    "Managers/Input Output/Narration Manager.md",
-    "Managers/Input Output/Input Manager.md",
-    "Managers/Input Output/Audio Manager.md",
-    "Managers/Core Game Managers/Level Manager.md",
     "Managers/UI Util",
-    "Managers/Interaction and Progression Manager",
-    "Managers/Input Output",
-    "Structure/Code Structure.canvas",
-    "Structure/File Structure.canvas"
+    "Managers/Interaction and Progression Manager"
   ]
 }

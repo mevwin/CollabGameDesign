@@ -1,1 +1,0 @@
-Applies settings to other systems like audio

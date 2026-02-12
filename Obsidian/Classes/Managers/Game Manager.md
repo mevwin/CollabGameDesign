@@ -1,0 +1,1 @@
+Stores global game state like transition, pause, booting, and all the game scenes
