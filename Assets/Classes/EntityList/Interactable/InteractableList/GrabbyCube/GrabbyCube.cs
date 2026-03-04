@@ -15,7 +15,10 @@ public class GrabbyCube : Interactable
         float mag = dir.magnitude;
         mag = Mathf.Clamp(mag, 0f, 10f);
         dir = dir.normalized * mag;
-        rigidBody.AddForce(dir * 10);
+        if (rigidBody.linearVelocity.magnitude <= 10f)
+        {
+            rigidBody.AddForce(dir * 10);
+        }
     }
 
     public void DisableGrav()

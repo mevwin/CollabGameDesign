@@ -397,6 +397,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1448249111 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7095264836103528553, guid: af86be5bda803fd44b4870ddcb971486, type: 3}
+  m_PrefabInstance: {fileID: 1798400168}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e92597144b7e7448f6657cc2802bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1448249112 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9062353819839965711, guid: af86be5bda803fd44b4870ddcb971486, type: 3}
+  m_PrefabInstance: {fileID: 1798400168}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e00193780c4fb4f9f1cfa007aff57d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &1448249113 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1555615146765107938, guid: af86be5bda803fd44b4870ddcb971486, type: 3}
+  m_PrefabInstance: {fileID: 1798400168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1448249118 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 9033984993301218919, guid: af86be5bda803fd44b4870ddcb971486, type: 3}
+  m_PrefabInstance: {fileID: 1798400168}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1713643483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -405,6 +437,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1439084216661243978, guid: 61c8b20da90fe1744a8bc5dbc776b97c, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1934278372}
     - target: {fileID: 6023534201621546915, guid: 61c8b20da90fe1744a8bc5dbc776b97c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -466,6 +502,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8055131235639129691, guid: af86be5bda803fd44b4870ddcb971486, type: 3}
+      propertyPath: collider
+      value: 
+      objectReference: {fileID: 1448249118}
+    - target: {fileID: -8055131235639129691, guid: af86be5bda803fd44b4870ddcb971486, type: 3}
+      propertyPath: rigidBody
+      value: 
+      objectReference: {fileID: 1448249113}
+    - target: {fileID: -8055131235639129691, guid: af86be5bda803fd44b4870ddcb971486, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1448249111}
+    - target: {fileID: -8055131235639129691, guid: af86be5bda803fd44b4870ddcb971486, type: 3}
+      propertyPath: stateManager
+      value: 
+      objectReference: {fileID: 1448249112}
+    - target: {fileID: 1555615146765107938, guid: af86be5bda803fd44b4870ddcb971486, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4215554377328170281, guid: af86be5bda803fd44b4870ddcb971486, type: 3}
       propertyPath: m_Mesh
       value: 
