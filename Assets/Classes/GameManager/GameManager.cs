@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuCanvas;
     private InputAction pauseAction;
 
-    [NonSerialized] public Player player;
+    public GameObject player;
 
 
     void Awake()
@@ -47,6 +47,9 @@ public class GameManager : MonoBehaviour
     {
         pauseAction = InputSystem.actions.FindAction("UI/Pause");
 
+        if (player)
+            player.SetActive(false);
+
         // TODO: change to be set in inspector
         LoadGameState(GameState.MAIN_MENU);
     }
@@ -59,9 +62,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static GameManager GetManager()
+    public void GameComplete()
     {
-        return Instance.GetComponent<GameManager>();
+        /**
+        If game is complete:
+            go back to main menu
+            deload player
+        */
+
+
+    }
+
+    public static GameManager GetManager()
+    {   
+        if (Instance)
+            return Instance.GetComponent<GameManager>();
+        return null;
     }
 
     // Async Loading Functions
@@ -73,7 +89,7 @@ public class GameManager : MonoBehaviour
         {
             case GameState.MAIN_MENU:
                 currentGameState = GameState.MAIN_MENU;
-                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
 
                 operation = SceneManager.LoadSceneAsync("MainMenu");
                 
@@ -129,13 +145,14 @@ public class GameManager : MonoBehaviour
     public void TogglePauseMenu()
     {
         Time.timeScale = Time.timeScale == 0f ? 1f : 0f;
-        Cursor.lockState = Time.timeScale == 0f ? CursorLockMode.None : CursorLockMode.Confined;
+        Cursor.lockState = Time.timeScale == 0f ? CursorLockMode.Confined : CursorLockMode.Locked;
         pauseMenuCanvas.SetActive(Time.timeScale == 0f);
     }
 
     public void ReturnToMainMenu()
     {
         pauseMenuCanvas.SetActive(false);
+        player.SetActive(false);
         Time.timeScale = 1f;
         LoadGameState(GameState.MAIN_MENU);
     }
