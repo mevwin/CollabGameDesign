@@ -123,6 +123,7 @@ MonoBehaviour:
   audioManager: {fileID: 4854608074896013649}
   movementSpeed: 0
   isActive: 0
+  listeners: []
 --- !u!135 &6115678521067955655
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -130,7 +131,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6571278165080497219}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3a09d4fc21963914e845680f5f53a62f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

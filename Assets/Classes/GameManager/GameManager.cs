@@ -74,8 +74,10 @@ public class GameManager : MonoBehaviour
     }
 
     public static GameManager GetManager()
-    {
-        return Instance.GetComponent<GameManager>();
+    {   
+        if (Instance)
+            return Instance.GetComponent<GameManager>();
+        return null;
     }
 
     // Async Loading Functions

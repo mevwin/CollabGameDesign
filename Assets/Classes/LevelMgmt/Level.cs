@@ -10,15 +10,14 @@ public class Level : MonoBehaviour
     {
         gameManager = GameManager.GetManager();
 
-
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Start()
     {
-        if (gameManager.player){
+        if (gameManager && gameManager.player){
             gameManager.player.SetActive(true);
-            gameManager.player.transform.position = playerSpawnPoint.position;
-            Cursor.lockState = CursorLockMode.Locked;
+            gameManager.player.transform.position = playerSpawnPoint.position;   
         }
     }
 
