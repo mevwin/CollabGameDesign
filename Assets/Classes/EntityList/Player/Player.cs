@@ -58,7 +58,7 @@ public class Player : Entity
 
         if (HasGrabbed())
         {
-            Vector3 position = transform.position + cam.transform.forward * 3;
+            Vector3 position = transform.position + cam.transform.forward * 3;// + transform.right * 2;
             itemPresent.Grabbed(position);
         }
 
@@ -146,17 +146,26 @@ public class Player : Entity
     {
         if (Physics.Raycast(this.transform.position, cam.transform.forward, out RaycastHit hit))
         {
-            if (hit.transform.gameObject.GetComponent<GrabbyCube>())
+            if (hit.transform.gameObject.GetComponent<GrabbyCube>() && hit.distance <= 3f)
             {
                 itemPresent = hit.transform.gameObject.GetComponent<GrabbyCube>();
-                itemPresent.DisableGrav();
                 return;
             }
+            else if (!HasGrabbed() && itemPresent != null)
+            {
+                itemPresent.Ungrabbed();
+                itemPresent = null;
+            }
+        }
+        else if (!HasGrabbed() && itemPresent != null)
+        {
+            itemPresent.Ungrabbed();
+            itemPresent = null;
         }
         InputAction grab = GetInputAction(InputKey.INTERACT);
         if (grab.WasReleasedThisFrame())
         {
-            itemPresent.EnableGrav();
+            itemPresent.Ungrabbed();
             itemPresent = null;
         }
     }

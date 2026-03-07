@@ -45,7 +45,7 @@ public class CameraControl : MonoBehaviour
 
     private void Positioning()
     {
-        if (Physics.Raycast(gameObject.transform.position, mainCamera.transform.forward * -1, out RaycastHit hit))
+        if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), mainCamera.transform.forward * -1, out RaycastHit hit))
         {
             if (hit.distance < 6f)
             {
@@ -61,6 +61,6 @@ public class CameraControl : MonoBehaviour
         {
             CameraOffsetY.transform.position = gameObject.transform.position + mainCamera.transform.forward * -6;
         }
-
+        CameraOffsetY.transform.position += new Vector3(0f, 2f, 0f);
     }
 }

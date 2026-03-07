@@ -14,20 +14,13 @@ public class GrabbyCube : Interactable
         Vector3 dir = position - transform.position;
         float mag = dir.magnitude;
         mag = Mathf.Clamp(mag, 0f, 10f);
-        dir = dir.normalized * mag;
-        if (rigidBody.linearVelocity.magnitude <= 10f)
-        {
-            rigidBody.AddForce(dir * 10);
-        }
+        dir = dir.normalized * mag * 10;
+        rigidBody.linearVelocity = dir;
+        rigidBody.angularVelocity *= 0.99f;
     }
 
-    public void DisableGrav()
+    public void Ungrabbed()
     {
-        rigidBody.useGravity = false;
-    }
-
-    public void EnableGrav()
-    {
-        rigidBody.useGravity = true;
+        rigidBody.linearVelocity = Vector3.zero;
     }
 }
