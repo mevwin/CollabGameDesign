@@ -9,6 +9,7 @@ public class Player : Entity
         MOVE,
         JUMP,
         INTERACT,
+        ABILITY,
     }
 
     public static GameObject Instance { get; private set; }
@@ -16,6 +17,8 @@ public class Player : Entity
     [Header("==Player Fields==")]
     [SerializeField] private float jumpSpeed = 25f;
     [SerializeField] private float groundDistanceCheck = 0.05f;
+    [SerializeField] private StateManager jobManager;
+    private string job = "";
 
     // Private Vars
     readonly Dictionary<InputKey, InputAction> inputActions = new();
@@ -41,6 +44,7 @@ public class Player : Entity
         base.Start();
 
         InitializeInputActionDict();
+        InitializeJobStates();
     }
 
     public override void Update()
@@ -52,12 +56,10 @@ public class Player : Entity
             hasJumped = true;
         }
 
-        
-        /*
-        if player pressed the pause button:
-            get game manager
-            gamemanager.togglePause()
-        */
+        if (inputActions[InputKey.ABILITY].WasPressedThisFrame())
+        {
+            jobManager.ChangeState(job);
+        }
     }
 
     public override void FixedUpdate()
@@ -88,7 +90,13 @@ public class Player : Entity
             inputActions.Add(InputKey.MOVE, InputSystem.actions.FindAction("Player/Move"));
             inputActions.Add(InputKey.JUMP, InputSystem.actions.FindAction("Player/Jump"));
             inputActions.Add(InputKey.INTERACT, InputSystem.actions.FindAction("Player/Interact"));
+            inputActions.Add(InputKey.ABILITY, InputSystem.actions.FindAction("Player/Attack"));
         }
+    }
+
+    private void InitializeJobStates()
+    {
+        jobManager.AddState("Builder", new Builder(this));
     }
 
     // Getter Functions
@@ -123,6 +131,12 @@ public class Player : Entity
     public bool HasJumped()
     {
         return inputActions[InputKey.JUMP].WasPressedThisFrame() && IsGrounded();
+    }
+
+    // Job Mgmt
+    public void SetPlayerJobAbility(string jobTitle)
+    {
+        job = jobTitle;
     }
 
     // Debug
