@@ -9,14 +9,19 @@ public class ExitTrigger : Interactable
 
     protected override void InitializeStates() { }
 
+    public override void Start()
+    {
+        LevelManager levelManager = LevelManager.GetManager();
+
+        if (dungeonLevelList)
+            levelManager.SetDungeonList(dungeonLevelList);
+    }
+
     public override void OnTriggerEnter(Collider collider)
     {
         if (isActive && collider.gameObject.TryGetComponent(out Player player))
         {
             GameManager gameManager = GameManager.GetManager();
-            LevelManager levelManager = LevelManager.GetManager();
-
-            levelManager.SetDungeonList(dungeonLevelList);
             gameManager.LoadGameState(nextGameState);
         }
     }

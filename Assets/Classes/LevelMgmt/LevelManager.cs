@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     public static GameObject Instance { get; private set; }
     [NonSerialized] public int currentLevelIndex = 0;
 
-    [SerializeField] private GameManager gameManager;
+    [SerializeField]
     private DungeonLevelList dungeonList;
 
     void Awake()
