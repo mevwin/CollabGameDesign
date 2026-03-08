@@ -261,6 +261,10 @@ PrefabInstance:
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3918183723052189389, guid: 1dfe8d4d168137149bdaf6f9308c2e7d, type: 3}
+      propertyPath: dungeonLevelList
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1317,6 +1321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpawnPoint: {fileID: 2058374168}
+  exitTrigger: {fileID: 0}
 --- !u!4 &1143049829
 Transform:
   m_ObjectHideFlags: 0

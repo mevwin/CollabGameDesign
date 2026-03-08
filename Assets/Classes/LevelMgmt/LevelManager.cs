@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,10 +7,10 @@ public class LevelManager : MonoBehaviour
 {
     // Public Attributes
     public static GameObject Instance { get; private set; }
-    public int CurrentLevelIndex { get; private set; } = 0;
+    [NonSerialized] public int currentLevelIndex = 0;
 
-    [SerializeField] private List<string> levelList = new();
-
+    [SerializeField] private GameManager gameManager;
+    private DungeonLevelList dungeonList;
 
     void Awake()
     {
@@ -22,28 +23,19 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    void Start()
+    public void SetDungeonList(DungeonLevelList list)
     {
-        
-    }
-
-    public AsyncOperation LoadLevel(string levelName)
-    {
-        if (levelList.Contains(levelName)) // Only load scenes that part of the levelList
-            return SceneManager.LoadSceneAsync(levelName);
-
-        return null;
-    }
-
-    public AsyncOperation LoadFirstLevel()
-    {
-        return LoadLevel(levelList[0]);
+        dungeonList = list;
     }
 
     public AsyncOperation LoadNextLevel()
     {
-        CurrentLevelIndex++;
-        return LoadLevel(levelList[CurrentLevelIndex]);
+        return SceneManager.LoadSceneAsync(dungeonList.GetLevelName(currentLevelIndex++));
+    }
+
+    public bool IsDungeonComplete()
+    {
+        return currentLevelIndex == dungeonList.GetSize();
     }
 
     public static LevelManager GetManager()

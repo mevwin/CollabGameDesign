@@ -112,6 +112,8 @@ MonoBehaviour:
   movementSpeed: 0
   isActive: 0
   listeners: []
+  nextGameState: 2
+  dungeonLevelList: {fileID: 0}
 --- !u!65 &7402753045291941895
 BoxCollider:
   m_ObjectHideFlags: 0

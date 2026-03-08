@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
         MAIN_MENU,
         IN_HUB,
         IN_PUZZLE,
+        ENTER_DUNGEON,
     }
 
     public static GameObject Instance { get; private set; }
@@ -97,17 +98,32 @@ public class GameManager : MonoBehaviour
                 
                 break;
 
-            case GameState.IN_HUB:
-                currentGameState = GameState.IN_HUB;
-                operation = SceneManager.LoadSceneAsync("HubWorld");
+            case GameState.ENTER_DUNGEON:
+                currentGameState = GameState.ENTER_DUNGEON;
+                LevelManager levelManager = LevelManager.GetManager();
+                
+                operation = levelManager.LoadNextLevel();
 
                 break;
 
             case GameState.IN_PUZZLE:
                 currentGameState = GameState.IN_PUZZLE;
 
-                LevelManager levelManager = LevelManager.GetManager();
-                operation = levelManager.LoadFirstLevel(); // TODO: change later
+                levelManager = LevelManager.GetManager();
+                
+                if (!levelManager.IsDungeonComplete())
+                    operation = levelManager.LoadNextLevel();
+                else 
+                {
+                    levelManager.currentLevelIndex = 0;
+                    operation = SceneManager.LoadSceneAsync("HubWorld");
+                }
+
+                break;
+
+            case GameState.IN_HUB:
+                currentGameState = GameState.IN_HUB;
+                operation = SceneManager.LoadSceneAsync("HubWorld");
 
                 break;
             
@@ -118,11 +134,11 @@ public class GameManager : MonoBehaviour
         if (operation != null)
         {
             loadingScreenCanvas.SetActive(true);
-            StartCoroutine(LoadGameStateAsync(operation));
+            StartCoroutine(LoadSceneAsync(operation));
         }
     }
 
-    private IEnumerator LoadGameStateAsync(AsyncOperation operation)
+    private IEnumerator LoadSceneAsync(AsyncOperation operation)
     {
         while (!operation.isDone)
         {
