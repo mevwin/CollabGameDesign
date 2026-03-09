@@ -54,11 +54,8 @@ public class StateManager : MonoBehaviour
         currentState?.OnTriggerExitState(other);
     }
 
-    public void SetStartingState(int index)
+    public void SetStartingState(string name)
     {
-        string[] keys = stateMap.Keys.ToArray();
-        if (index >= keys.Length) return; // validation
-
-        currentState = stateMap[stateMap.Keys.ToArray()[index]];
+        currentState = stateMap[name];
     }
 }

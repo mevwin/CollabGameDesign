@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,19 +13,31 @@ public class Player : Entity
         ABILITY,
     }
 
+    public enum Job
+    {
+        NONE,
+        BUILDER,
+        MUSICIAN,
+        ATHLETE,
+        ARTIST,
+    }
+
     public static GameObject Instance { get; private set; }
 
     [Header("==Player Fields==")]
     [SerializeField] private float jumpSpeed = 25f;
     [SerializeField] private float groundDistanceCheck = 0.05f;
+
+    // Jop Mgmt
     private readonly StateManager jobManager = new();
-    private string currentJob = "";
+    private Job currentJob = Job.NONE;
 
     // Private Vars
     readonly Dictionary<InputKey, InputAction> inputActions = new();
 
-    // Movement Flags
+    // Player Flags
     bool hasJumped = false;
+    [NonSerialized] public bool abilityActive = false;
 
     // Item Detection
     [SerializeField] private GameObject cam;
@@ -68,11 +81,18 @@ public class Player : Entity
 
         DetectItem();
 
-        /*
-        if player pressed the pause button:
-            get game manager
-            gamemanager.togglePause()
-        */
+        // Job Ability Logic
+        // Input Check
+        if (IsAbilityPressed() && currentJob > Job.NONE && !abilityActive)
+        {
+            abilityActive = true;
+            jobManager.ChangeState(JobEnumToString(currentJob));
+        }
+
+        if (abilityActive && currentJob > Job.NONE)
+        {
+            jobManager.CurrentStateUpdate();
+        }
     }
 
     public override void FixedUpdate()
@@ -87,13 +107,21 @@ public class Player : Entity
             hasJumped = false;
         }
 
+        if (abilityActive && currentJob > Job.NONE)
+        {
+            jobManager.CurrentStateFixedUpdate();
+        }
+
         //Debug.Log(rigidBody.linearVelocity);
     }
 
+    // Initialization
     protected override void InitializeStates()
     {
         AddState("Idle", new PlayerIdle(this));
         AddState("Move", new PlayerMove(this));
+
+        SetStartingState("Idle");
     }
 
     private void InitializeInputActionDict()
@@ -109,7 +137,11 @@ public class Player : Entity
 
     private void InitializeJobStates()
     {
+        jobManager.AddState("None", new NoJob(this));
         jobManager.AddState("Builder", new Builder(this));
+
+        SetPlayerJobAbility(Job.BUILDER);
+        jobManager.SetStartingState("None");
     }
 
     // Getter Functions
@@ -147,15 +179,37 @@ public class Player : Entity
     }
 
     // Job Mgmt
-    public void SetPlayerJobAbility(string jobTitle)
+    public void SetPlayerJobAbility(Job newJob)
     {
-        currentJob = jobTitle;
+        currentJob = newJob;
     }
 
+    public bool IsAbilityPressed()
+    {
+        return inputActions[InputKey.ABILITY].WasPressedThisFrame();
+    }
+
+    public string JobEnumToString(Job job)
+    {
+        string title = job switch {
+            Job.ARTIST => "Artist",
+            Job.ATHLETE => "Athlete",
+            Job.BUILDER => "Builder",
+            Job.MUSICIAN => "Musician",
+            _ => "None"
+        };
+        return title;
+    }
+
+    public void ExitJobState()
+    {
+        jobManager.ChangeState("None");
+    }
+
+    // Interact
     public bool HasGrabbed()
     {
-        InputAction grab = GetInputAction(InputKey.INTERACT);
-        return grab.IsPressed() && (itemPresent != null);
+        return inputActions[InputKey.INTERACT].IsPressed() && (itemPresent != null);
     }
 
     public void DetectItem()

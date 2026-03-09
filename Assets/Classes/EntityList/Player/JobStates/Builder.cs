@@ -5,23 +5,34 @@ public class Builder : JobState
 {
     public Builder(Player player): base(player) { }
 
+    private float timer = 0f;
+
+
+    // TODO: implement me
     public override void EnterState(Dictionary<string, object> args = null)
     {
-        
+        Debug.Log("Activated Builder Ability");
+        timer = 0f;
     }
 
     public override void UpdateState()
     {
-        
+        Debug.Log("Updating Builder Ability State");
+        timer += Time.deltaTime;
+        if (timer > 2.0f) 
+        {
+            player.ExitJobState();
+        }
     }
 
     public override void FixedUpdateState()
     {
- 
+        Debug.Log("Fixed Updating Builder Ability State");
     }
 
     public override void ExitState(Dictionary<string, object> args = null)
     {
-        
+        player.abilityActive = false;
+        Debug.Log("Exitted Builder Ability");
     }
 }

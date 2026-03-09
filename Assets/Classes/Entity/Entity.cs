@@ -30,7 +30,6 @@ public abstract class Entity : MonoBehaviour
     public virtual void Start()
     {
         InitializeStates();
-        stateManager.SetStartingState(0);
     }
 
     // Overridable Entity Functions
@@ -102,6 +101,11 @@ public abstract class Entity : MonoBehaviour
     public void ChangeState(string newState, Dictionary<string, object> args = null)
     {
         stateManager.ChangeState(newState, args);
+    }
+
+    public void SetStartingState(string state)
+    {
+        stateManager.SetStartingState(state);
     }
 
     // Audio Manager Wrapper Functions
