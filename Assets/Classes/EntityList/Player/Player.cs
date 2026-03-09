@@ -26,6 +26,10 @@ public class Player : Entity
     // Movement Flags
     bool hasJumped = false;
 
+    // Item Detection
+    [SerializeField] private GameObject cam;
+    GrabbyCube itemPresent;
+
     public override void Awake()
     {
         base.Awake();
@@ -56,10 +60,19 @@ public class Player : Entity
             hasJumped = true;
         }
 
-        if (inputActions[InputKey.ABILITY].WasPressedThisFrame())
+        if (HasGrabbed())
         {
-            jobManager.ChangeState(job);
+            Vector3 position = transform.position + cam.transform.forward * 3;// + transform.right * 2;
+            itemPresent.Grabbed(position);
         }
+
+        DetectItem();
+
+        /*
+        if player pressed the pause button:
+            get game manager
+            gamemanager.togglePause()
+        */
     }
 
     public override void FixedUpdate()
@@ -137,6 +150,40 @@ public class Player : Entity
     public void SetPlayerJobAbility(string jobTitle)
     {
         job = jobTitle;
+    }
+
+    public bool HasGrabbed()
+    {
+        InputAction grab = GetInputAction(InputKey.INTERACT);
+        return grab.IsPressed() && (itemPresent != null);
+    }
+
+    public void DetectItem()
+    {
+        if (Physics.Raycast(this.transform.position, cam.transform.forward, out RaycastHit hit))
+        {
+            if (hit.transform.gameObject.GetComponent<GrabbyCube>() && hit.distance <= 3f)
+            {
+                itemPresent = hit.transform.gameObject.GetComponent<GrabbyCube>();
+                return;
+            }
+            else if (!HasGrabbed() && itemPresent != null)
+            {
+                itemPresent.Ungrabbed();
+                itemPresent = null;
+            }
+        }
+        else if (!HasGrabbed() && itemPresent != null)
+        {
+            itemPresent.Ungrabbed();
+            itemPresent = null;
+        }
+        InputAction grab = GetInputAction(InputKey.INTERACT);
+        if (grab.WasReleasedThisFrame())
+        {
+            itemPresent.Ungrabbed();
+            itemPresent = null;
+        }
     }
 
     // Debug
