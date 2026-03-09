@@ -58,6 +58,7 @@ public class Player : Entity
     public override void Update()
     {
         base.Update();
+        if (Time.timeScale == 0f) return;
 
         if (HasJumped()) {
             // PlayAudioSource("Footsteps");
@@ -89,6 +90,8 @@ public class Player : Entity
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+        if (Time.timeScale == 0f) return;
+        
         rigidBody.angularVelocity = Vector3.zero;
 
         if (hasJumped) {
